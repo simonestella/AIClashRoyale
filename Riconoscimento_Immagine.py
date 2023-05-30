@@ -102,18 +102,16 @@ while True:
     attackRules = "attacco(Nome) | nAttacco(Nome) :- cartaInMano(Nome)."
     attackRules += ":- attacco(Nome), carta(Nome,Mana,Tipo,Forza,Target), manaDisponibile(ManaDisponibile), ManaDisponibile < Mana."
     attackRules += ":- attacco(Nome), carta(Nome,Mana,Tipo,Forza,Target), Tipo == 2."
-    attackRules += ":- attacco(Nome), attacco(Nome1), carta(Nome,Mana,Tipo,Forza,Target), carta(Nome1,Mana1,Tipo1,Forza1,Target1), Forza < Forza1."
     attackRules += ":- #count{Nome : attacco(Nome)} < 1."
-    attackRules += ":~ attacco(Nome), carta(Nome,Mana,Tipo,Forza,Target). [Forza@Target]"
+    attackRules += ":~ attacco(Nome), carta(Nome,Mana,Tipo,Forza,Target). [Target@1,Nome,Mana,Tipo,Forza,Target]"
 
     #Regole per la difesa
     defendRules = "cartaDaGiocareInDifesa(Nome) | nCartaDaGiocareInDifesa(Nome) :- cartaInMano(Nome)."
     defendRules += ":- cartaDaGiocareInDifesa(Nome), carta(Nome,Mana,Tipo,Forza,Target), Target == 1."
     defendRules += ":- cartaDaGiocareInDifesa(Nome), carta(Nome,Mana,Tipo,Forza,Target), manaDisponibile(ManaDisponibile), ManaDisponibile < Mana."
     defendRules += ":- cartaDaGiocareInDifesa(Nome), cartaInCampo(Nome1), carta(Nome,Mana,Tipo,Forza,Target), carta(Nome1,Mana1,Tipo1,Forza1,Target1), Target < Target1."
-    defendRules += ":- cartaDaGiocareInDifesa(Nome), cartaDaGiocareInDifesa(Nome1), carta(Nome,Mana,Tipo,Forza,Target), carta(Nome1,Mana1,Tipo1,Forza1,Target1), Forza < Forza1."
     defendRules += ":- #count{Nome : cartaDaGiocareInDifesa(Nome)} < 1."
-    defendRules += ":~ cartaDaGiocareInDifesa(Nome), carta(Nome,Mana,Tipo,Forza,Target). [Tipo@Target]"
+    defendRules += ":~ cartaDaGiocareInDifesa(Nome), carta(Nome,Mana,Tipo,Forza,Target). [Tipo@1,Nome,Mana,Tipo,Forza,Target]"
     
     
     inputProgram.add_program("carta(knight, 3, 1, 5, 2).")
